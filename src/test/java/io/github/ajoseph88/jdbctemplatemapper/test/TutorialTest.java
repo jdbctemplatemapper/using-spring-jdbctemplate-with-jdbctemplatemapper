@@ -37,11 +37,14 @@ public class TutorialTest {
     emp.setLastName("Smith");
     jtm.update(emp);
     
-    List<Employee> employees = Query.type(Employee.class)
-        .hasOne(Department.class)
-        .joinColumnOwningSide("department_id") // join column (the foreign key) is on employee table
-        .populateProperty("department")
-        .execute(jtm);
+    // Query the hasOne relationship 
+    // Query.class has methods for where and orderBy clauses. Not using them for this tutorial.
+    List<Employee> employees = 
+        Query.type(Employee.class)
+             .hasOne(Department.class)
+             .joinColumnOwningSide("department_id") // join column (the foreign key) is on employee table
+             .populateProperty("department")
+             .execute(jtm);
    
     assertTrue(employees.size() > 0);
     assertTrue("HR department".equals(employees.get(0).getDepartment().getName()));
