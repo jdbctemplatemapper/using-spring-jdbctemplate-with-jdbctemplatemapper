@@ -12,15 +12,18 @@ import io.github.jdbctemplatemapper.core.JdbcTemplateMapper;
 @Component
 public class JdbcTemplateMapperConfig {
 
+  // see application.properties for spring.datasource configuration
   @Bean
   @ConfigurationProperties(prefix = "spring.datasource")
   public DataSource sqlDataSource() {
     return DataSourceBuilder.create().build();
   }
 
+  // Once Spring sees that a Datasource bean is configured it instantiates a default JdbcTemplate
+  // object. Use that JdbcTemplate object to configure JdbcTemplateMapper
   @Bean
   public JdbcTemplateMapper jdbcTemplateMapper(JdbcTemplate jdbcTemplate) {
-    return  new JdbcTemplateMapper(jdbcTemplate);
+    return new JdbcTemplateMapper(jdbcTemplate);
   }
 
 }
