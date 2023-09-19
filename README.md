@@ -3,6 +3,8 @@ Spring's JdbcTemplate provides data access using JDBC for relational databases. 
 
 JdbcTemplate  abstracts away a lot of the JDBC low level code but using it still remains verbose. The JdbcTemplateMapper library mitigates this verboseness. Its a wrapper around JdbcTemplate. Sprinkle the models with a few annotations and you get single line CRUD and fluent queries for relationships like hasOne, hasMany etc.
 
+Github project for [JdbcTemplateMapper](https://github.com/jdbctemplatemapper/jdbctemplatemapper)
+
 
 ## Example code:
 
@@ -97,9 +99,6 @@ public class Department {
   }
 ```
   
-The library provides multiple ways to query relationships and has other features which make developing a little bit easier.
-
-The JdbctemplateMapper github project is at https://github.com/jdbctemplatemapper/jdbctemplatemapper 
 
 
 
