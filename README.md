@@ -1,107 +1,21 @@
 # Using Spring JdbcTemplate with JdbcTemplateMapper #
-Spring's JdbcTemplate provides data access using JDBC for relational databases. It is an option for applications where using an ORM with their impedance mismatch and nuances may not be a good fit.
-
-JdbcTemplate  abstracts away a lot of the JDBC low level code but using it still remains verbose. The JdbcTemplateMapper library mitigates this verboseness. Its a wrapper around JdbcTemplate. Sprinkle the models with a few annotations and you get single line CRUD and fluent queries for relationships like hasOne, hasMany etc.
+This is a tutorial on how to use JdbcTemplateMapper.
 
 Github project for [JdbcTemplateMapper](https://github.com/jdbctemplatemapper/jdbctemplatemapper)
 
+The example code for this tutorial is in class [TutorialTest.java](src/test/java/io/github/ajoseph88/jdbctemplatemapper/test/TutorialTest.java)
 
-## Example code:
+The tests go against a MySQL database so you will need one installed and running. Also you will need to create a database named 'tutorial'. See application.properties file if you need to change the userid/password for the database. The tables needed for the tests are created by flyway when the tests are run so no need to manually create them.
 
-```
-
-@Table(name = "employee")
-public class Employee {
-
-  @Id(type = IdType.AUTO_INCREMENT)
-  private Integer id; // maps to id column in table. The id gets assigned on insert.
-
-  @Column
-  private String lastName; // maps to last_name column in table
-
-  @Column
-  private String firstName; // maps to first_name column in table
-
-  @Column
-  private LocalDateTime startDate; // maps to start_date in table
-
-  @Column
-  private Integer departmentId; // maps to department_id in table. Foreign key
-
-  private Department department; // there are no mappings for relationships
-  
-  ...
-}
-
-@Table(name = "department")
-public class Department {
-  @Id(type = IdType.AUTO_INCREMENT)
-  private Integer id; // maps to id column in table. The id gets assigned on insert
-
-  @Column(name = "department_name")
-  private String name; // maps to department_name in table
-
-  ...
-}
+You can run the test from the command line with:
 
 ```
-
-## Usage:
-
-```
-  @Autowired
-  private JdbcTemplateMapper jtm;
- 
-  ...
- 
-  Department dept = new Department();
-  dept.setName("HR department");
-  jtm.insert(dept); // auto assigns id on insert since id configured as auto increment
-  
-  Employee emp = new Employee();
-  emp.setFirstName("John");
-  emp.setLastName("Doe");
-  emp.setStartDate(LocalDateTime.now());
-  emp.setDepartmentId(dept.getId());
-  jtm.insert(emp); // auto assigns id on insert since id configured as auto increment
-  
-  emp = jtm.findById(Employee.class, emp.getId());
-  emp.setLastName("Smith");
-  jtm.update(emp);
-    
-  // Querying a hasOne relationship. The query allows for where and orderBy clauses but 
-  // for this tutorial not using it. The IDE will help you chain the fluent methods.  
-  
-  List<Employee> employees = Query.type(Employee.class) // owning class
-                                  .hasOne(Department.class) // related class
-                                  .joinColumnOwningSide("department_id") // join column (the foreign key) is on owning (employee) table
-                                  .populateProperty("department")
-                                  .execute(jtm);
-                                  
+mvn clean package
 ```
 
-## pom.xml entry for jdbctemplatemapper:
-
-```
-<dependency>
-   <groupId>io.github.jdbctemplatemapper</groupId>
-   <artifactId>jdbctemplatemapper</artifactId>
-   <version>2.1.2</version>
-</dependency>
-```
-
-## Spring bean configuration:
-
-```
-  @Bean
-  public JdbcTemplateMapper jdbcTemplateMapper(JdbcTemplate jdbcTemplate) {
-    return  new JdbcTemplateMapper(jdbcTemplate);
-  }
-```
-  
+You should see all the SQL being issued on the console.
 
 
-
-
+To see how JdbcTemplateMapper is configured take a look at file [JdbcTemplateMapperConfig.java](src/test/java/io/github/ajoseph88/jdbctemplatemapper/config/JdbcTemplateMapperConfig.java)
 
 
