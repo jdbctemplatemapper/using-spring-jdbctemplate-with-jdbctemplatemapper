@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Every time the tests are run the database is reset (schema is dropped) and migration scripts run
- * again so we have a fresh set of tables and data.
+ * again so we have a fresh set of tables
  *
  */
 @Component
