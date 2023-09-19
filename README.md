@@ -99,11 +99,8 @@ public class Department {
   
 The library provides multiple ways to query relationships and has other features which make developing a little bit easier.
 
-Source code for this tutorial is available at https://github.com/jdbctemplatemapper/using-spring-jdbctemplate-with-jdbctemplatemapper
-
 The JdbctemplateMapper github project is at https://github.com/jdbctemplatemapper/jdbctemplatemapper 
 
-Happy coding everyone!
 
 
 
