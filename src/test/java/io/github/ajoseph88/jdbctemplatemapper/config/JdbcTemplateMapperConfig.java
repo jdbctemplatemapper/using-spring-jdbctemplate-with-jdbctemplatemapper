@@ -19,8 +19,8 @@ public class JdbcTemplateMapperConfig {
     return DataSourceBuilder.create().build();
   }
 
-  // Once Spring sees that a Datasource bean is configured it instantiates a default JdbcTemplate
-  // object. Use that JdbcTemplate object to configure JdbcTemplateMapper
+  // Once Spring sees that a DataSource bean is configured it instantiates a default JdbcTemplate
+  // bean. Use that JdbcTemplate bean to configure JdbcTemplateMapper
   @Bean
   public JdbcTemplateMapper jdbcTemplateMapper(JdbcTemplate jdbcTemplate) {
     return new JdbcTemplateMapper(jdbcTemplate);
