@@ -38,7 +38,6 @@ public class TutorialTest {
     jtm.update(emp);
     
     // query the employee hasOne department relationship
-    // Query.class has methods for where and orderBy clauses. Not using them for this tutorial.
     List<Employee> employees = 
         Query.type(Employee.class)
              .hasOne(Department.class)
