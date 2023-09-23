@@ -5,7 +5,7 @@ Github project for [JdbcTemplateMapper](https://github.com/jdbctemplatemapper/jd
 
 The example code for this tutorial is in class [TutorialTest.java](src/test/java/io/github/ajoseph88/jdbctemplatemapper/test/TutorialTest.java)
 
-The tests go against a MySQL database so you will need one installed and running. Also, you will need to create a database named 'tutorial'. See [application.properties](src/test/resources/application.properties) file if you need to change the userid/password for the database. The tables needed for the tests are created automatically when the tests are run so no need to manually create them.
+The tests go against a MySQL database. On your MySQL instance you will need to create a database named 'tutorial'. Make appropriate changes to [application.properties](src/test/resources/application.properties) file so you can connect to your database. The tables needed for the tests are created automatically when the tests are run so no need to manually create them.
 
 You can run the test from the command line with:
 
