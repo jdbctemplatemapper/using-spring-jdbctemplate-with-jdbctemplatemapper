@@ -24,6 +24,10 @@ public class JdbcTemplateMapperConfig {
   @Bean
   public JdbcTemplateMapper jdbcTemplateMapper(JdbcTemplate jdbcTemplate) {
     return new JdbcTemplateMapper(jdbcTemplate);
+    
+    // for Postgres, Oracle, SqlServer need to pass in  schema name as argument.
+    
+    // return new JdbcTemplateMapper(jdbcTemplate, THE_SCHEMA_NAME);
   }
 
 }
