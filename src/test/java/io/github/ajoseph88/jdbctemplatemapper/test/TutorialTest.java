@@ -12,6 +12,8 @@ import io.github.ajoseph88.jdbctemplatemapper.model.Department;
 import io.github.ajoseph88.jdbctemplatemapper.model.Employee;
 import io.github.jdbctemplatemapper.core.JdbcTemplateMapper;
 import io.github.jdbctemplatemapper.core.Query;
+import io.github.jdbctemplatemapper.core.QueryCount;
+import io.github.jdbctemplatemapper.core.QueryMerge;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -62,6 +64,32 @@ public class TutorialTest {
     assertTrue(departments.size() > 0);
     assertTrue(departments.get(0).getEmployees().size() > 0);
     assertTrue("John".equals(departments.get(0).getEmployees().get(0).getFirstName()));
-
+    
+    
+    // Paginated query for departments
+    departments = 
+        Query.type(Department.class)
+             .where("department_name like ?", "HR%")
+             .orderBy("department_name")
+             .limitOffsetClause("LIMIT 10 OFFSET 0")  // MySQL syntax. Would be different for other databases.
+             .execute(jtm);
+      
+    // QueryMerge will issue an SQL 'IN' clause with department ids and populate the employees
+    // for the corresponding departments
+        QueryMerge.type(Department.class)
+             .hasMany(Employee.class)
+             .joinColumnManySide("department_id") // join column (the foreign key) is on many side table employee
+             .populateProperty("employees")
+             .execute(jtm, departments); // merges employees to their corresponding department  
+        
+        assertTrue(departments.get(0).getEmployees().size() > 0);
+      
+      // To get total count of records
+      Integer count = QueryCount.type(Department.class)
+                      .where("department_name like ?", "HR%")
+                      .execute(jtm);
+      
+      assertTrue(count > 0);
+      
   }
 }
