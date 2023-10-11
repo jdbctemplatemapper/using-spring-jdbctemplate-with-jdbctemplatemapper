@@ -23,7 +23,7 @@ public class TutorialTest {
   private JdbcTemplateMapper jtm;
 
   @Test
-  public void employee_test() {
+  public void tutorial_test() {
     Department dept = new Department();
     dept.setName("HR department");
     jtm.insert(dept); // auto assigns id on insert since id configured as auto increment
@@ -49,7 +49,6 @@ public class TutorialTest {
    
     assertTrue(employees.size() > 0);
     assertTrue("HR department".equals(employees.get(0).getDepartment().getName()));
-    
     
     // query the department hasMany employee relationship
     List<Department> departments = 
