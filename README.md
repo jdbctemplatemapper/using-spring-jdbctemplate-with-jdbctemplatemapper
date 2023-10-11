@@ -1,7 +1,9 @@
 # Using Spring JdbcTemplate with JdbcTemplateMapper #
 This is a tutorial on how to use JdbcTemplateMapper which is a wrapper around Spring JdbcTemplate to make CRUD and relationship queries less verbose.
 
-Github project for [JdbcTemplateMapper](https://github.com/jdbctemplatemapper/jdbctemplatemapper)
+The DZone [article](https://dzone.com/articles/using-spring-jdbctemplate-with-jdbctemplatemapper) corresponding to this tutorial.
+
+Github project for [JdbcTemplateMapper](https://github.com/jdbctemplatemapper/jdbctemplatemapper) library.
 
 The example code for this tutorial is in class [TutorialTest.java](src/test/java/io/github/ajoseph88/jdbctemplatemapper/test/TutorialTest.java)
 
