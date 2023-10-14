@@ -59,7 +59,8 @@ public class TutorialTest {
              .joinColumnManySide("department_id") // join column is on many side table employee
              .populateProperty("employees")
              .where("department.department_name like ?", "HR%")
-             .orderBy("employee.last_name").execute(jtm);
+             .orderBy("employee.last_name")
+             .execute(jtm);
 
     assertTrue(departments.size() > 0);
     assertTrue(departments.get(0).getEmployees().size() > 0);
@@ -86,8 +87,8 @@ public class TutorialTest {
     // To get total count of records
     Integer count =
         QueryCount.type(Department.class)
-        .where("department_name like ?", "HR%")
-        .execute(jtm);
+                  .where("department_name like ?", "HR%")
+                  .execute(jtm);
 
     assertTrue(count > 0);
 
