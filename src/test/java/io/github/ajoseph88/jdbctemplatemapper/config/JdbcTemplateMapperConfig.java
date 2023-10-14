@@ -23,10 +23,11 @@ public class JdbcTemplateMapperConfig {
   // bean. Use the JdbcTemplate bean to configure JdbcTemplateMapper
   @Bean
   public JdbcTemplateMapper jdbcTemplateMapper(JdbcTemplate jdbcTemplate) {
+    //MySQL configuration
     return new JdbcTemplateMapper(jdbcTemplate, null, "tutorial");
-    
-    // for Postgres, Oracle, SqlServer need to pass in  schema name as argument.
-    // return new JdbcTemplateMapper(jdbcTemplate, THE_SCHEMA_NAME);
+
+    // For JdbcTemplateMapper configurations for other databases see documentation at:
+    // https://github.com/jdbctemplatemapper/jdbctemplatemapper#spring-bean-configuration-for-jdbctemplatemapper
   }
 
 }

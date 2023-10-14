@@ -14,7 +14,7 @@ public class Department {
 
   @Column(name = "department_name")
   private String name; // maps to department_name in table
-  
+
   private List<Employee> employees = new ArrayList<>(); // there are no mappings for relationships
 
   public Integer getId() {
@@ -40,5 +40,5 @@ public class Department {
   public void setEmployees(List<Employee> employees) {
     this.employees = employees;
   }
-  
+
 }
