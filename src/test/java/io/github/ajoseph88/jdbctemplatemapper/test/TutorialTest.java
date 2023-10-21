@@ -40,6 +40,11 @@ public class TutorialTest {
     emp = jtm.findById(Employee.class, emp.getId());
     emp.setLastName("Smith");
     jtm.update(emp);
+    
+    // updateProperties() updates only the specified properties passed as arguments.
+    emp.setFirstName("Joe");
+    jtm.updateProperties(emp, "firstName"); // will issue an SQL update only for firstName
+    
 
     // query the employee hasOne department relationship
     List<Employee> employees =
@@ -64,7 +69,7 @@ public class TutorialTest {
 
     assertTrue(departments.size() > 0);
     assertTrue(departments.get(0).getEmployees().size() > 0);
-    assertTrue("John".equals(departments.get(0).getEmployees().get(0).getFirstName()));
+    assertTrue("Joe".equals(departments.get(0).getEmployees().get(0).getFirstName()));
 
     // Paginated query for departments
     departments = 
