@@ -48,9 +48,9 @@ public class TutorialTest {
 
     // query the employee hasOne department relationship
     List<Employee> employees =
-        Query.type(Employee.class) // owning class
+        Query.type(Employee.class) // type class
              .hasOne(Department.class)
-             .joinColumnOwningSide("department_id") // join column is on owning side table employee 
+             .joinColumnTypeSide("department_id") // join column is on type side table employee 
              .populateProperty("department")
              .execute(jtm);
 
@@ -59,7 +59,7 @@ public class TutorialTest {
 
     // query the department hasMany employee relationship
     List<Department> departments =
-        Query.type(Department.class) // owning class
+        Query.type(Department.class) // type class
              .hasMany(Employee.class) 
              .joinColumnManySide("department_id") // join column is on many side table employee
              .populateProperty("employees")
